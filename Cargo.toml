@@ -1,6 +1,6 @@
 [package]
 name = "thehome-panasonic-comfort-cloud"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 license = "MIT"
 description = "Panasonic Comfort Cloud som ekstern integration til TheHome"
@@ -15,7 +15,8 @@ thehome-plugin = { git = "https://github.com/magnusdunker/thehome-example-integr
 tokio = { version = "1", features = ["rt-multi-thread", "macros", "time", "sync"] }
 async-trait = "0.1"
 serde = { version = "1", features = ["derive"] }
-serde_json = "1"
+# keeps the field order of setup forms
+serde_json = { version = "1", features = ["preserve_order"] }
 reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
 anyhow = "1"
 thiserror = "2"
