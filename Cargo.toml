@@ -3,7 +3,7 @@ name = "thehome-panasonic-comfort-cloud"
 version = "0.1.1"
 edition = "2021"
 license = "MIT"
-description = "Panasonic Comfort Cloud som ekstern integration til TheHome"
+description = "Panasonic Comfort Cloud som ekstern integration til HomewrightHQ"
 publish = false
 
 [[bin]]
@@ -11,7 +11,7 @@ name = "panasonic_comfort_cloud"
 path = "src/main.rs"
 
 [dependencies]
-thehome-plugin = { git = "https://github.com/magnusdunker/thehome-example-integration-rust", rev = "50825762517f5d34318f423b3df8e3f35fa73102" }
+thehome-plugin = { git = "https://github.com/magnusdunker/homewrighthq-example-integration-rust", rev = "50825762517f5d34318f423b3df8e3f35fa73102" }
 tokio = { version = "1", features = ["rt-multi-thread", "macros", "time", "sync"] }
 async-trait = "0.1"
 serde = { version = "1", features = ["derive"] }

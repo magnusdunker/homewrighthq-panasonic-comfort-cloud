@@ -1,5 +1,5 @@
-//! The API and model tests are the same as for TheHome's built-in
-//! panasonic_cc; `plugin_setup_and_control` plays TheHome over a pipe.
+//! The API and model tests are the same as for HomewrightHQ's built-in
+//! panasonic_cc; `plugin_setup_and_control` plays HomewrightHQ over a pipe.
 
 mod host;
 

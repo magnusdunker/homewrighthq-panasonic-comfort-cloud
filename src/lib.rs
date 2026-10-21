@@ -1,13 +1,13 @@
 //! Panasonic Comfort Cloud: air conditioners and heat pumps (air-to-air)
-//! through Panasonic's cloud, as an external integration for TheHome.
+//! through Panasonic's cloud, as an external integration for HomewrightHQ.
 //!
 //! The user logs in with their Panasonic ID. Each unit becomes a device with
 //! a climate entity, temperature sensors, air direction selects, a nanoe
 //! switch where supported and today's energy use. Aquarea (air-to-water) and
 //! hot-water tanks use other endpoints and are skipped.
 //!
-//! `api` and `model` are the same as in TheHome's built-in `panasonic_cc`;
-//! this file connects them to TheHome through the `thehome-plugin` SDK.
+//! `api` and `model` are the same as in HomewrightHQ's built-in `panasonic_cc`;
+//! this file connects them to HomewrightHQ through the `thehome-plugin` SDK.
 
 pub mod api;
 pub mod model;
@@ -30,7 +30,7 @@ const SETTLE: Duration = Duration::from_secs(20);
 /// target temperature, fan mode, preset, turn off, turn on
 const CLIMATE_FEATURES: u64 = 1 | 8 | 16 | 128 | 256;
 
-/// Logging to TheHome's log through stderr.
+/// Logging to HomewrightHQ's log through stderr.
 #[doc(hidden)]
 pub fn emit(level: &str, message: String) {
     thehome_plugin::log(level, message);

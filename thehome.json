@@ -4,5 +4,5 @@
   "plugin_api": 1,
   "config_flow": true,
   "iot_class": "cloud_polling",
-  "documentation": "https://github.com/magnusdunker/thehome-panasonic-comfort-cloud"
+  "documentation": "https://github.com/magnusdunker/homewrighthq-panasonic-comfort-cloud"
 }
