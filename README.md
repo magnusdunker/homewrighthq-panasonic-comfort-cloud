@@ -1,54 +1,54 @@
-# Panasonic Comfort Cloud til HomewrightHQ
+# Panasonic Comfort Cloud for HomewrightHQ
 
-En ekstern integration til [HomewrightHQ](https://github.com/magnusdunker/homewrighthq) for Panasonic-aircondition og luft-til-luft-varmepumper gennem Panasonics Comfort Cloud. Aquarea (luft-til-vand) og varmtvandsbeholdere bruger andre endpoints og er ikke med.
+An external integration for [HomewrightHQ](https://github.com/magnusdunker/homewrighthq) for Panasonic air conditioners and air-to-air heat pumps through Panasonic's Comfort Cloud. Aquarea (air-to-water) and hot water tanks use other endpoints and are not included.
 
 ## Installation
 
-I HomewrightHQ: **Indstillinger → Integrationer → Fra GitHub**. Indsæt
+In HomewrightHQ: **Settings → Integrations → From GitHub**. Paste
 
 ```
 https://github.com/magnusdunker/homewrighthq-panasonic-comfort-cloud
 ```
 
-og tryk **Installér**. Tilføj derefter **Panasonic Comfort Cloud** under **Tilføj integration**, og log ind med det Panasonic ID, du bruger i Comfort Cloud-appen.
+and press **Install**. Then add **Panasonic Comfort Cloud** under **Add integration**, and log in with the Panasonic ID you use in the Comfort Cloud app.
 
-## Hvad du får
+## What you get
 
-Hver enhed bliver en enhed i HomewrightHQ med:
+Each unit becomes a device in HomewrightHQ with:
 
-- et klimaanlæg med tilstande (auto, varme, køl, affugt, blæser), temperatur, blæserhastighed og forindstillingerne boost og quiet
-- `heat_8_15` på enheder med "+8/15 °C heat". En måltemperatur under 16 °C slår den til, ligesom i appen
-- indetemperatur og udetemperatur
-- lodret og vandret luftretning, hvor enheden har vandret
-- nanoe, hvor enheden har det
-- energiforbrug i dag
+- a climate entity with modes (auto, heat, cool, dry, fan), temperature, fan speed and the presets boost and quiet
+- `heat_8_15` on units with "+8/15 °C heat". A target temperature below 16 °C turns it on, as in the app
+- indoor temperature and outdoor temperature
+- vertical and horizontal airflow direction, where the unit has horizontal
+- nanoe, where the unit has it
+- energy consumption today
 
-Tilstanden hentes hvert andet minut, energien hvert kvarter. Efter en kommando venter integrationen 20 sekunder, før den læser igen, fordi skyen et øjeblik kan svare med de gamle værdier.
+The state is fetched every two minutes, the energy every fifteen minutes. After a command the integration waits 20 seconds before reading again, because the cloud can briefly answer with the old values.
 
-Login-sessionen gemmes i integrationens datamappe, så en genstart ikke kræver et nyt login. Afviser Panasonic adgangskoden, eller skal nye vilkår accepteres i appen, viser HomewrightHQ det under problemer, og integrationen kan godkendes igen med **Log ind igen**. Konti med totrinsbekræftelse understøttes ikke endnu.
+The login session is stored in the integration's data folder, so a restart does not need a new login. If Panasonic rejects the password, or new terms have to be accepted in the app, HomewrightHQ shows it under repairs, and the integration can be reauthenticated with **Log in again**. Accounts with two-factor authentication are not supported yet.
 
-## Forholdet til den indbyggede integration
+## Relation to the built-in integration
 
-HomewrightHQ har også Panasonic Comfort Cloud indbygget (`panasonic_cc`). Den eksterne integration har sit eget domæne, `panasonic_comfort_cloud`, så de to kan være installeret samtidig. Koden er den samme, men den eksterne kører som sit eget program og opdateres uafhængigt af HomewrightHQ.
+HomewrightHQ also has Panasonic Comfort Cloud built in (`panasonic_cc`). The external integration has its own domain, `panasonic_comfort_cloud`, so the two can be installed at the same time. The code is the same, but the external one runs as its own program and is updated independently of HomewrightHQ.
 
-Skifter du fra den indbyggede, skal integrationen sættes op igen. Enheder og entities får nye id'er, så automationer og dashboards, der bruger de gamle, skal rettes. Slet den indbyggede opsætning bagefter, så enhederne ikke styres fra to steder.
+If you switch from the built-in one, the integration has to be set up again. Devices and entities get new IDs, so automations and dashboards that use the old ones have to be updated. Delete the built-in setup afterwards, so the units are not controlled from two places.
 
-## Udvikling
+## Development
 
-Bygget i Rust på SDK'en `thehome-plugin` fra [thehome-example-integration-rust](https://github.com/magnusdunker/homewrighthq-example-integration-rust).
+Built in Rust on the `thehome-plugin` SDK from [thehome-example-integration-rust](https://github.com/magnusdunker/homewrighthq-example-integration-rust).
 
-- `src/api.rs`: login med Panasonic ID og Comfort Cloud-API'et
-- `src/model.rs`: Comfort Clouds data og hvordan de bliver til tilstande og kommandoer
-- `src/lib.rs`: forbindelsen til HomewrightHQ
-- `tests/`: tests mod en falsk Panasonic-sky, og en falsk HomewrightHQ i `tests/host`
+- `src/api.rs`: login with Panasonic ID and the Comfort Cloud API
+- `src/model.rs`: Comfort Cloud's data and how it becomes states and commands
+- `src/lib.rs`: the connection to HomewrightHQ
+- `tests/`: tests against a fake Panasonic cloud, and a fake HomewrightHQ in `tests/host`
 
 ```
 cargo test
 cargo build --release
 ```
 
-En ny version udgives med et tag, f.eks. `git tag v0.2.0 && git push origin v0.2.0`. Workflowet bygger til Windows, Linux (x86_64 og arm64, statisk musl) og macOS og lægger binærerne på releasen.
+A new version is released with a tag, e.g. `git tag v0.2.0 && git push origin v0.2.0`. The workflow builds for Windows, Linux (x86_64 and arm64, static musl) and macOS and puts the binaries on the release.
 
-## Licens
+## License
 
 MIT
